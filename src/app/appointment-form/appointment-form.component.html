@@ -1,0 +1,67 @@
+<div class="container">
+  <h2>{{ editMode ? 'Editar Turno' : 'Crear Turno' }}</h2>
+  <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+    {{ errorMessage }}
+  </div>
+  <form [formGroup]="appointmentForm" (ngSubmit)="onSubmit()" class="mb-5">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label for="petName" class="form-label">Nombre de la Mascota</label>
+          <input type="text" class="form-control" id="petName" formControlName="petName">
+          <div *ngIf="appointmentForm.get('petName')?.invalid && appointmentForm.get('petName')?.touched" class="text-danger">
+            <div *ngIf="appointmentForm.get('petName')?.errors?.['required']">El nombre de la mascota es obligatorio.</div>
+            <div *ngIf="appointmentForm.get('petName')?.errors?.['pattern']">Solo letras y espacios permitidos.</div>
+            <div *ngIf="appointmentForm.get('petName')?.errors?.['maxlength']">Máximo 50 caracteres.</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label for="ownerName" class="form-label">Nombre del Dueño</label>
+          <input type="text" class="form-control" id="ownerName" formControlName="ownerName">
+          <div *ngIf="appointmentForm.get('ownerName')?.invalid && appointmentForm.get('ownerName')?.touched" class="text-danger">
+            <div *ngIf="appointmentForm.get('ownerName')?.errors?.['required']">El nombre del dueño es obligatorio.</div>
+            <div *ngIf="appointmentForm.get('ownerName')?.errors?.['pattern']">Solo letras y espacios permitidos.</div>
+            <div *ngIf="appointmentForm.get('ownerName')?.errors?.['maxlength']">Máximo 100 caracteres.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label for="date" class="form-label">Fecha</label>
+          <input type="date" class="form-control" id="date" formControlName="date">
+          <div *ngIf="appointmentForm.get('date')?.invalid && appointmentForm.get('date')?.touched" class="text-danger">
+            <div *ngIf="appointmentForm.get('date')?.errors?.['required']">La fecha es obligatoria.</div>
+            <div *ngIf="appointmentForm.get('date')?.errors?.['minDate']">La fecha debe ser hoy o futura.</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label for="time" class="form-label">Hora</label>
+          <input type="time" class="form-control" id="time" formControlName="time">
+          <div *ngIf="appointmentForm.get('time')?.invalid && appointmentForm.get('time')?.touched" class="text-danger">
+            <div *ngIf="appointmentForm.get('time')?.errors?.['required']">La hora es obligatoria.</div>
+            <div *ngIf="appointmentForm.get('time')?.errors?.['timeRange']">La hora debe estar entre 08:00 y 18:00.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="reason" class="form-label">Motivo</label>
+      <textarea class="form-control" id="reason" formControlName="reason"></textarea>
+      <div *ngIf="appointmentForm.get('reason')?.invalid && appointmentForm.get('reason')?.touched" class="text-danger">
+        <div *ngIf="appointmentForm.get('reason')?.errors?.['required']">El motivo es obligatorio.</div>
+        <div *ngIf="appointmentForm.get('reason')?.errors?.['minlength']">Mínimo 10 caracteres.</div>
+        <div *ngIf="appointmentForm.get('reason')?.errors?.['maxlength']">Máximo 200 caracteres.</div>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="appointmentForm.invalid">
+      {{ editMode ? 'Actualizar Turno' : 'Crear Turno' }}
+    </button>
+    <button type="button" class="btn btn-secondary ms-2" (click)="cancel()">Cancelar</button>
+  </form>
+</div>

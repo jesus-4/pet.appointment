@@ -1,0 +1,20 @@
+{
+  "appointments": [
+    {
+      "petName": "zeus",
+      "ownerName": "jesus",
+      "date": "2025-06-20",
+      "time": "11:40",
+      "reason": "algun motivo interesante :)",
+      "id": "1748900656989"
+    },
+    {
+      "id": "1748900752784",
+      "petName": "Zoe",
+      "ownerName": "Matias",
+      "date": "2025-08-07",
+      "time": "09:22",
+      "reason": "checkeo rutinario de salud"
+    }
+  ]
+}

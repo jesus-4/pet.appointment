@@ -1,0 +1,33 @@
+<div class="container">
+  <h2>Lista de Turnos</h2>
+  <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+    {{ errorMessage }}
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID Turno</th>
+        <th>Mascota</th>
+        <th>Dueño</th>
+        <th>Fecha</th>
+        <th>Hora</th>
+        <th>Motivo</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let appointment of appointments">
+        <td>{{ appointment.id }}</td>
+        <td>{{ appointment.petName }}</td>
+        <td>{{ appointment.ownerName }}</td>
+        <td>{{ appointment.date }}</td>
+        <td>{{ appointment.time }}</td>
+        <td>{{ appointment.reason }}</td>
+        <td>
+          <button class="btn btn-warning btn-sm me-2" [routerLink]="['/edit', appointment.id]" [disabled]="!appointment.id">Editar</button>
+          <button class="btn btn-danger btn-sm" (click)="deleteAppointment(appointment.id)" [disabled]="!appointment.id">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
